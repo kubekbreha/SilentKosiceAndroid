@@ -24,7 +24,7 @@ public class RecordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_record0);
+        setContentView(R.layout.activity_record);
         mRecorder = new MyMediaRecorder();
         text = (TextView) findViewById(R.id.textView_currentDB);
     }
@@ -51,10 +51,7 @@ public class RecordActivity extends AppCompatActivity {
         handler.sendEmptyMessageDelayed(msgWhat, refreshTime);
     }
 
-    /**
-     * 开始记录
-     * @param fFile
-     */
+
     public void startRecord(File fFile){
         try{
             mRecorder.setMyRecAudioFile(fFile);
@@ -69,7 +66,6 @@ public class RecordActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -81,7 +77,6 @@ public class RecordActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "创建文件失败", Toast.LENGTH_LONG).show();
         }
     }
-
 
 
     @Override
