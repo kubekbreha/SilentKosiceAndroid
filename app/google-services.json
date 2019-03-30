@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "414751960868",
+    "firebase_url": "https://silentkosice.firebaseio.com",
+    "project_id": "silentkosice",
+    "storage_bucket": "silentkosice.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414751960868:android:f006548943a5701d",
+        "android_client_info": {
+          "package_name": "sk.spacecode.silentkosice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "414751960868-3aa1an9mbgnceu7u5k7fnh5u9jgue80a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sk.spacecode.silentkosice",
+            "certificate_hash": "722ff39cdf381e161b79d802ec4ed8bb51923b6e"
+          }
+        },
+        {
+          "client_id": "414751960868-vd1ua1a6pgssje5s8gpl9s0d8s2ddr25.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfN96ZFKY882x-QQJr6_XVrcxoeWGdrKQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "414751960868-vd1ua1a6pgssje5s8gpl9s0d8s2ddr25.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
