@@ -1,13 +1,9 @@
 package sk.spacecode.silentkosice
 
-import android.media.MediaRecorder
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
-import java.io.IOException
-import android.support.v4.os.HandlerCompat.postDelayed
-import android.os.SystemClock
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_record.*
@@ -78,11 +74,15 @@ class RecordActivity : AppCompatActivity() {
 //
 //        handler!!.postDelayed(runnable, 0)
 
+        textView_profile.setOnClickListener {
+            val profileIntent = Intent(this@RecordActivity, ProfileActivity::class.java)
+            this@RecordActivity.startActivity(profileIntent)
+        }
     }
 
     private fun pushDataRecord(timestamp: String, decibel: String, userNumber: String?, lat: String?, long: String?) {
         val data = DecibelData(timestamp, decibel, userNumber, lat, long)
-        val newRef = database.child(userNumber).child("records").child(timestamp).setValue(data)
+        val newRef = database.child(userNumber!!).child("records").child(timestamp).setValue(data)
     }
 
 

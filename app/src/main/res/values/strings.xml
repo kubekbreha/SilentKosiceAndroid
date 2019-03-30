@@ -5,4 +5,11 @@
     <string name="hint_code">Verification code</string>
     <string name="get_code">Get verification code</string>
     <string name="sign_in">Sign in</string>
+    <string name="user_name">Snoopy Dog</string>
+    <string name="level_text">Level</string>
+    <string name="level_value">12</string>
+    <string name="total_records">Total records</string>
+    <string name="total_records_value">152</string>
+    <string name="today_records_text">Today records</string>
+    <string name="today_records_value">5</string>
 </resources>

@@ -19,6 +19,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".ProfileActivity">
+            
         </activity>
 
         <activity android:name=".RecordActivity">

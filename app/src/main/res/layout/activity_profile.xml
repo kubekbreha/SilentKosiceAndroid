@@ -2,8 +2,142 @@
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ProfileActivity">
+
+    <RelativeLayout
+            android:id="@+id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/colorPrimary">
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="@id/empty"
+            app:cardBackgroundColor="@color/colorPrimary"
+            android:layout_gravity="center"
+            card_view:cardElevation="0dp"
+            card_view:cardCornerRadius="32dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <RelativeLayout
+                android:id="@+id/layout_user_photo_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/text_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/user_name"
+                    android:background="@color/colorPrimary"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/profile_image"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/text_user_name"
+                    android:src="@drawable/snoopy"
+                    android:layout_marginTop="8dp"
+                    app:civ_border_color="@android:color/white"
+                    app:civ_border_width="3dp"/>
+
+            <TextView
+                    android:id="@+id/text_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="36dp"
+                    android:textAlignment="center"
+                    android:paddingTop="16dp"
+                    android:layout_below="@id/profile_image"
+                    android:text="@string/level_text"/>
+
+            <TextView
+                    android:id="@+id/text_level_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="16dp"
+                    android:layout_marginStart="38dp"
+                    android:layout_alignParentStart="true"
+                    android:textAlignment="textStart"
+                    android:layout_below="@id/text_level"
+                    android:textColor="@android:color/white"
+                    android:text="@string/level_value"/>
+
+            <TextView
+                    android:id="@+id/text_today_record"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="16dp"
+                    android:textSize="16sp"
+                    android:layout_centerInParent="true"
+                    android:textAlignment="center"
+                    android:layout_below="@id/profile_image"
+                    android:text="@string/today_records_text"/>
+
+            <TextView
+                    android:id="@+id/text_today_record_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="16dp"
+                    android:layout_centerInParent="true"
+                    android:textAlignment="center"
+                    android:layout_below="@id/text_today_record"
+                    android:textColor="@android:color/white"
+                    android:text="@string/today_records_value"/>
+
+            <TextView
+                    android:id="@+id/text_total_records"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="16dp"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="16dp"
+                    android:textAlignment="center"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/profile_image"
+                    android:text="@string/total_records"/>
+
+            <TextView
+                    android:id="@+id/text_total_records_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="16dp"
+                    android:layout_marginEnd="48dp"
+                    android:layout_alignParentEnd="true"
+                    android:textAlignment="center"
+                    android:layout_below="@id/text_total_records"
+                    android:textColor="@android:color/white"
+                    android:text="@string/total_records_value"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
 
 </android.support.constraint.ConstraintLayout>
