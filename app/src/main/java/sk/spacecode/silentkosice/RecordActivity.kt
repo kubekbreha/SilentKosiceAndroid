@@ -4,10 +4,7 @@ import android.media.MediaRecorder
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import java.io.IOException
-import android.support.v4.os.HandlerCompat.postDelayed
-import android.os.SystemClock
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_record.*
@@ -17,12 +14,16 @@ class RecordActivity : AppCompatActivity() {
 
     private var i = 0
     var handler: Handler? = null
+    lateinit var mRecorder : MediaRecorder
+    private var mEMA = 0.0
+    private val EMA_FILTER = 0.6
 
     private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_record)
+
 //        output = externalCacheDir?.absolutePath + "/${convertDateToFilename()}.mp3"
 //        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC)
 //        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
@@ -40,12 +41,9 @@ class RecordActivity : AppCompatActivity() {
 //            } catch (e: IOException) {
 //                e.printStackTrace()
 //            }
-            val tsLong = System.currentTimeMillis() / 1000
-            pushDataRecord(tsLong.toString(), "70","+4210902130280", "37.90909", "37.90909")
-
         }
-//
-//        button_stop_recording.setOnClickListener {
+
+        button_stop_recording.setOnClickListener {
 //            if (state) {
 //                mediaRecorder.stop()
 //                mediaRecorder.release()
@@ -53,30 +51,31 @@ class RecordActivity : AppCompatActivity() {
 //            } else {
 //                Toast.makeText(this, "You are not recording right now!", Toast.LENGTH_SHORT).show()
 //            }
-//        }
+            val tsLong = System.currentTimeMillis() / 1000
+            pushDataRecord(tsLong.toString(), "70","+4210902130280", "37.90909", "37.90909")
+        }
 
 
         database = FirebaseDatabase.getInstance().reference
 
 
-//
-//        handler = Handler()
-//        var mRecorder = MediaRecorder()
-//        mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC)
-//        mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-//        mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-//        mRecorder.setOutputFile("/dev/null")
-//        try {
-//            mRecorder.prepare()
-//        } catch (e: IllegalStateException) {
-//            e.printStackTrace()
-//        } catch (e: IOException) {
-//            e.printStackTrace()
-//        }
-//
-//        mRecorder.start()
-//
-//        handler!!.postDelayed(runnable, 0)
+        mRecorder =  MediaRecorder()
+        handler = Handler()
+        mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC)
+        mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+        mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+        mRecorder.setOutputFile("/dev/null")
+        try {
+            mRecorder.prepare()
+        } catch (e: IllegalStateException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        mRecorder.start()
+
+        handler!!.postDelayed(runnable, 100)
 
     }
 
@@ -88,11 +87,30 @@ class RecordActivity : AppCompatActivity() {
 
     var runnable: Runnable = object : Runnable {
         override fun run() {
-            i++
-            textView_currentDB.text = (i.toString())
+            updateTv()
             handler!!.postDelayed(this, 0)
         }
     }
 
+    fun updateTv() {
+        textView_currentDB.text = java.lang.Double.toString(getAmplitudeEMA()) + " dB"
+        progressBar_volume.progress = getAmplitudeEMA().toInt()
+    }
 
+    fun soundDb(ampl: Double): Double {
+        return 20 * Math.log10(getAmplitudeEMA() / ampl)
+    }
+
+    fun getAmplitude(): Double {
+        return if (mRecorder != null)
+            mRecorder.maxAmplitude.toDouble()
+        else
+            0.0
+    }
+
+    fun getAmplitudeEMA(): Double {
+        val amp = getAmplitude()
+        mEMA = EMA_FILTER * amp + (1.0 - EMA_FILTER) * mEMA
+        return mEMA
+    }
 }
