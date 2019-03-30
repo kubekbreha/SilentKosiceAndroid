@@ -2,8 +2,54 @@
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent" android:layout_height="match_parent"
         tools:context=".LoginActivity">
+
+
+    <EditText
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/edit_textPhone"
+            android:layout_width="305dp"
+            android:layout_height="46dp"
+            android:digits="0123456789"
+            android:ems="10"
+            android:hint="Enter phone"
+            android:inputType="phone" app:layout_constraintHorizontal_bias="0.506" android:layout_marginBottom="392dp"/>
+
+    <Button
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/button_getVerificationCode"
+            android:layout_width="305dp"
+            android:layout_height="wrap_content"
+            android:text="Get Verification Code"
+            android:textAllCaps="false" app:layout_constraintHorizontal_bias="0.506"
+            android:layout_marginBottom="336dp"/>
+
+    <EditText
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/edit_textCode"
+            android:layout_width="305dp"
+            android:layout_height="wrap_content"
+            android:digits="0123456789"
+            android:hint="Enter code received"
+            android:inputType="number" app:layout_constraintHorizontal_bias="0.506"
+            android:layout_marginBottom="248dp"/>
+
+    <Button
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/button_signIn"
+            android:layout_width="305dp"
+            android:layout_height="wrap_content"
+            android:text="Sign In" app:layout_constraintHorizontal_bias="0.506" android:layout_marginBottom="192dp"/>
+
 
 </android.support.constraint.ConstraintLayout>
