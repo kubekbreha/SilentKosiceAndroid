@@ -13,7 +13,6 @@ class RecordActivity : AppCompatActivity() {
     private var output = ""
     private var mediaRecorder = MediaRecorder()
     private var state = false
-    private var recordingStopped = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +41,7 @@ class RecordActivity : AppCompatActivity() {
                 mediaRecorder.stop()
                 mediaRecorder.release()
                 state = false
+                Toast.makeText(this, "Recording stopped !", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "You are not recording right now!", Toast.LENGTH_SHORT).show()
             }
