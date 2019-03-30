@@ -32,10 +32,6 @@ public class MyMediaRecorder {
 		this.myRecAudioFile = myRecAudioFile;
 	}
 
-	/**
-	 * 录音
-	 * @return 是否成功开始录音
-     */
 	public boolean startRecorder(){
 		if (myRecAudioFile == null) {
 			return false;

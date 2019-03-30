@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ public class RecordActivity extends AppCompatActivity {
     float volume = 10000;
     private MyMediaRecorder mRecorder;
     private TextView text;
+    private ImageView progressCircle;
     private static final int msgWhat = 0x1001;
     private static final int refreshTime = 100;
 
@@ -26,7 +28,8 @@ public class RecordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
         mRecorder = new MyMediaRecorder();
-        text = (TextView) findViewById(R.id.textView_currentDB);
+        text = findViewById(R.id.textView_currentDB);
+        progressCircle = findViewById(R.id.imageView_circleProgress);
     }
 
 
@@ -38,10 +41,14 @@ public class RecordActivity extends AppCompatActivity {
             if (this.hasMessages(msgWhat)) {
                 return;
             }
-            volume = mRecorder.getMaxAmplitude();  //获取声压值
+            volume = mRecorder.getMaxAmplitude();
             if(volume > 0 && volume < 1000000) {
                 World.setDbCount(20 * (float)(Math.log10(volume)));
                 text.setText((int)World.dbCount+" DB");
+
+                progressCircle.getLayoutParams().height = (((int)World.dbCount*100)/140)*15;
+                progressCircle.getLayoutParams().width = (((int)World.dbCount*100)/140)*15;
+
             }
             handler.sendEmptyMessageDelayed(msgWhat, refreshTime);
         }
@@ -58,10 +65,10 @@ public class RecordActivity extends AppCompatActivity {
             if (mRecorder.startRecorder()) {
                 startListenAudio();
             }else{
-                Toast.makeText(this, "启动录音失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Recording already started", Toast.LENGTH_SHORT).show();
             }
         }catch(Exception e){
-            Toast.makeText(this, "录音机已被占用或录音权限被禁止", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Something went terribly wrong", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
@@ -74,7 +81,7 @@ public class RecordActivity extends AppCompatActivity {
             Log.v("file", "file =" + file.getAbsolutePath());
             startRecord(file);
         } else {
-            Toast.makeText(getApplicationContext(), "创建文件失败", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Something went terribly wrong", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -82,7 +89,7 @@ public class RecordActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        mRecorder.delete(); //停止记录并删除录音文件
+        mRecorder.delete();
         handler.removeMessages(msgWhat);
     }
 
