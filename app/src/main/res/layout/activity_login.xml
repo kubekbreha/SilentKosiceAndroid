@@ -3,53 +3,117 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         tools:context=".LoginActivity">
 
-
-    <EditText
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/edit_textPhone"
-            android:layout_width="305dp"
-            android:layout_height="46dp"
-            android:digits="0123456789"
-            android:ems="10"
-            android:hint="Enter phone"
-            android:inputType="phone" app:layout_constraintHorizontal_bias="0.506" android:layout_marginBottom="392dp"/>
-
-    <Button
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/button_getVerificationCode"
-            android:layout_width="305dp"
+    <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Get Verification Code"
-            android:textAllCaps="false" app:layout_constraintHorizontal_bias="0.506"
-            android:layout_marginBottom="336dp"/>
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.4"/>
 
-    <EditText
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/edit_textCode"
-            android:layout_width="305dp"
+    <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@id/guideline"
+            app:cardBackgroundColor="@color/colorPrimary"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:digits="0123456789"
-            android:hint="Enter code received"
-            android:inputType="number" app:layout_constraintHorizontal_bias="0.506"
-            android:layout_marginBottom="248dp"/>
+            card_view:cardCornerRadius="32dp">
 
-    <Button
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/button_signIn"
-            android:layout_width="305dp"
-            android:layout_height="wrap_content"
-            android:text="Sign In" app:layout_constraintHorizontal_bias="0.506" android:layout_marginBottom="192dp"/>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
+            <EditText
+                    android:id="@+id/edit_textPhone"
+                    android:layout_alignParentTop="true"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:background="@drawable/edittext_frame"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginStart="32dp"
+                    android:padding="8dp"
+                    android:digits="+0123456789"
+                    android:ems="15"
+                    android:hint="@string/hint_number"
+                    android:inputType="phone"/>
+
+            <Button
+                    android:id="@+id/button_getVerificationCode"
+                    android:layout_below="@id/edit_textPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="32dp"
+                    android:text="@string/get_code"
+                    android:background="@drawable/button_frame"
+                    android:padding="16dp"
+                    android:textSize="16sp"
+                    android:textAllCaps="false"/>
+
+            <EditText
+                    android:id="@+id/edit_textCode"
+                    android:layout_below="@id/button_getVerificationCode"
+                    android:background="@drawable/edittext_frame"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginStart="32dp"
+                    android:padding="8dp"
+                    android:digits="0123456789"
+                    android:hint="@string/hint_code"
+                    android:inputType="number"/>
+
+            <Button
+                    android:id="@+id/button_signIn"
+                    android:layout_below="@id/edit_textCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:padding="16dp"
+                    android:background="@drawable/button_frame"
+                    android:layout_marginStart="32dp"
+                    android:textSize="16sp"
+                    android:text="@string/sign_in"/>
+
+            <TextView
+                    android:id="@+id/text_powered_by"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/button_signIn"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/powered_by"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:layout_marginTop="88dp"/>
+
+            <TextView
+                    android:id="@+id/fake"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/powered_by"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:layout_margin="16dp"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
 
 </android.support.constraint.ConstraintLayout>

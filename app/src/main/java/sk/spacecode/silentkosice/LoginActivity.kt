@@ -3,21 +3,19 @@ package sk.spacecode.silentkosice
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.google.firebase.auth.PhoneAuthProvider
-import com.google.firebase.FirebaseException
-import com.google.firebase.auth.PhoneAuthCredential
 import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthProvider
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.concurrent.TimeUnit
-
 
 class LoginActivity : AppCompatActivity() {
 
     lateinit var mAuth: FirebaseAuth
     lateinit var codeSent: String
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +29,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun verifySignInCode() {
         val code = edit_textCode.text.toString()
-
         var credential: PhoneAuthCredential? = null
+
         try {
             credential = PhoneAuthProvider.getCredential(codeSent, code)
         } catch (e: Exception) {
@@ -41,7 +39,8 @@ class LoginActivity : AppCompatActivity() {
                 "Incorrect Verification Code ", Toast.LENGTH_LONG
             ).show()
         }
-        if (credential != null) {
+
+        credential?.let {
             signInWithPhoneAuthCredential(credential)
         }
     }
@@ -50,7 +49,6 @@ class LoginActivity : AppCompatActivity() {
         mAuth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    //here you can open new activity
                     Toast.makeText(
                         applicationContext,
                         "Login Successfull", Toast.LENGTH_LONG
@@ -84,28 +82,27 @@ class LoginActivity : AppCompatActivity() {
         }
 
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-            phone, // Phone number to verify
-            60, // Timeout duration
-            TimeUnit.SECONDS, // Unit of timeout
-            this, // Activity (for callback binding)
+            phone,
+            60,
+            TimeUnit.SECONDS,
+            this,
             mCallbacks
-        )        // OnVerificationStateChangedCallbacks
+        )
     }
 
     private fun goToRecordActivity() {
         val intent = Intent(this, RecordActivity::class.java)
-        //intent.putExtra("keyIdentifier", value)
         startActivity(intent)
     }
 
 
-    var mCallbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks =
+    private var mCallbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks =
         object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             override fun onVerificationCompleted(phoneAuthCredential: PhoneAuthCredential) {
                 Toast.makeText(
                     applicationContext,
-                    "Number already verified.", Toast.LENGTH_LONG
+                    "Number already verified.", Toast.LENGTH_SHORT
                 ).show()
                 goToRecordActivity()
             }
@@ -113,7 +110,7 @@ class LoginActivity : AppCompatActivity() {
             override fun onVerificationFailed(e: FirebaseException) {
                 Toast.makeText(
                     applicationContext,
-                    "Code sending failed.", Toast.LENGTH_LONG
+                    "Code sending failed.", Toast.LENGTH_SHORT
                 ).show()
             }
 
@@ -124,10 +121,7 @@ class LoginActivity : AppCompatActivity() {
                     applicationContext,
                     "Code send.", Toast.LENGTH_LONG
                 ).show()
-
-
                 codeSent = s!!
             }
-
         }
 }
