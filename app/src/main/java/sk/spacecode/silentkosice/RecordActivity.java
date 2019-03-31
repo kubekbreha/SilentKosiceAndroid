@@ -168,6 +168,8 @@ public class RecordActivity extends AppCompatActivity {
     private void pushDataRecord(String timestamp, String decibel, String userNumber, String lat, String lon) {
         DecibelDataJava data = new DecibelDataJava(timestamp, decibel, userNumber, lat, lon);
         mDatabase.child(userNumber).child("records").child(timestamp).setValue(data);
+        Toast.makeText(getApplicationContext(), "Data record send.", Toast.LENGTH_LONG).show();
+
     }
 
 
