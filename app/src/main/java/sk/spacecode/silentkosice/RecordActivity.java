@@ -42,17 +42,31 @@ public class RecordActivity extends AppCompatActivity {
                 World.setDbCount(20 * (float) (Math.log10(volume)));
                 actualDB.setText((int) World.dbCount + " dB");
 
-                imageButton.getLayoutParams().height = (((int) World.dbCount * 100) / 140) * 12;
-                imageButton.getLayoutParams().width = (((int) World.dbCount * 100) / 140) * 12;
-                imageAudio.getLayoutParams().height = (((int) World.dbCount * 100) / 140) * 12;
-                imageAudio.getLayoutParams().width = (((int) World.dbCount * 100) / 140) * 12;
-                progressCircle2.getLayoutParams().height = (((int) World.dbCount * 100) / 90) * 11;
-                progressCircle2.getLayoutParams().width = (((int) World.dbCount * 100) / 90) * 11;
+
+                handleFront();
             }
 
             handler.sendEmptyMessageDelayed(msgWhat, refreshTime);
         }
     };
+
+    private void handleFront() {
+        if (recording) {
+            imageButton.getLayoutParams().height = (((int) World.dbCount * 100) / 140) * 12;
+            imageButton.getLayoutParams().width = (((int) World.dbCount * 100) / 140) * 12;
+            imageAudio.getLayoutParams().height = (((int) World.dbCount * 100) / 140) * 12;
+            imageAudio.getLayoutParams().width = (((int) World.dbCount * 100) / 140) * 12;
+            progressCircle2.getLayoutParams().height = (((int) World.dbCount * 100) / 90) * 11;
+            progressCircle2.getLayoutParams().width = (((int) World.dbCount * 100) / 90) * 11;
+        } else {
+            imageButton.getLayoutParams().height = 300;
+            imageButton.getLayoutParams().width = 300;
+            imageAudio.getLayoutParams().height = 300;
+            imageAudio.getLayoutParams().width = 300;
+            progressCircle2.getLayoutParams().height = 300;
+            progressCircle2.getLayoutParams().width = 300;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,13 +81,13 @@ public class RecordActivity extends AppCompatActivity {
         actualDB = findViewById(R.id.textView_currentDB);
         profileText = findViewById(R.id.profile_button);
 
-        File file = FileUtil.createFile("temp.amr");
-        if (file != null) {
-            Log.v("file", "file =" + file.getAbsolutePath());
-            startRecord(file);
-        } else {
-            Toast.makeText(getApplicationContext(), "Something went terribly wrong", Toast.LENGTH_LONG).show();
-        }
+//        File file = FileUtil.createFile("temp.amr");
+//        if (file != null) {
+//            Log.v("file", "file =" + file.getAbsolutePath());
+//            startRecord(file);
+//        } else {
+//            Toast.makeText(getApplicationContext(), "Something went terribly wrong", Toast.LENGTH_LONG).show();
+//        }
 
         profileText.setOnClickListener(new View.OnClickListener() {
 
@@ -88,9 +102,8 @@ public class RecordActivity extends AppCompatActivity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                if(!recording){
+                if (!recording) {
                     counter++;
-                    recording = true;
                     File file = FileUtil.createFile("temp.amr");
                     if (file != null) {
                         Log.v("file", "file =" + file.getAbsolutePath());
@@ -98,9 +111,10 @@ public class RecordActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(getApplicationContext(), "Something went terribly wrong", Toast.LENGTH_LONG).show();
                     }
-                }else {
-                    progressCircle2.getLayoutParams().height = 340;
-                    progressCircle2.getLayoutParams().width = 340;
+                    recording = true;
+                } else {
+                    recording = false;
+                     handleFront();
                     mRecorder.delete();
                     handler.removeMessages(msgWhat);
                     actualDB.setText("Not recording");
@@ -121,15 +135,15 @@ public class RecordActivity extends AppCompatActivity {
     }
 
 
-    public void startRecord(File fFile){
-        try{
+    public void startRecord(File fFile) {
+        try {
             mRecorder.setMyRecAudioFile(fFile);
             if (mRecorder.startRecorder()) {
                 startListenAudio();
-            }else{
+            } else {
                 Toast.makeText(this, "Recording already started", Toast.LENGTH_SHORT).show();
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             Toast.makeText(this, "Something went terribly wrong", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
