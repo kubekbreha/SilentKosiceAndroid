@@ -19,4 +19,6 @@
     <string name="progress_2">4/20</string>
     <string name="week_stats">Weekly statistics</string>
     <string name="profile_text">Profile</string>
+    <string name="info_text">Tap to start recording</string>
+    <string name="not_recording">Not recording</string>
 </resources>

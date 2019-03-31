@@ -20,14 +20,35 @@ public class RecordActivity extends AppCompatActivity {
     float volume = 10000;
     private MyMediaRecorder mRecorder;
     private TextView actualDB;
-    private TextView resultDB;
-    private TextView profileText;
+    private ImageView profileText;
     private ImageView progressCircle2;
     private ImageView imageButton;
     private static final int msgWhat = 0x1001;
     private static final int refreshTime = 100;
 
     private boolean recording = false;
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (this.hasMessages(msgWhat)) {
+                return;
+            }
+            volume = mRecorder.getMaxAmplitude();
+            if (volume > 0 && volume < 1000000) {
+                World.setDbCount(20 * (float) (Math.log10(volume)));
+                actualDB.setText((int) World.dbCount + " dB");
+
+                imageButton.getLayoutParams().height = (((int) World.dbCount * 100) / 140) * 12;
+                imageButton.getLayoutParams().width = (((int) World.dbCount * 100) / 140) * 12;
+                progressCircle2.getLayoutParams().height = (((int) World.dbCount * 100) / 90) * 11;
+                progressCircle2.getLayoutParams().width = (((int) World.dbCount * 100) / 90) * 11;
+            }
+
+            handler.sendEmptyMessageDelayed(msgWhat, refreshTime);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +60,6 @@ public class RecordActivity extends AppCompatActivity {
         imageButton = findViewById(R.id.imageView_circleProgress);
 
         actualDB = findViewById(R.id.textView_currentDB);
-        resultDB = findViewById(R.id.textView_result);
         profileText = findViewById(R.id.profile_button);
 
         File file = FileUtil.createFile("temp.amr");
@@ -63,7 +83,6 @@ public class RecordActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(!recording){
-                    resultDB.setText("");
 
                     recording = true;
                     File file = FileUtil.createFile("temp.amr");
@@ -78,9 +97,8 @@ public class RecordActivity extends AppCompatActivity {
                     progressCircle2.getLayoutParams().width = 340;
                     mRecorder.delete();
                     handler.removeMessages(msgWhat);
-                    actualDB.setText("Record");
+                    actualDB.setText("Not recording");
 
-                    resultDB.setText("Average DB was 99");
                 }
             }
         });
@@ -91,7 +109,6 @@ public class RecordActivity extends AppCompatActivity {
         Log.e("TVOJAMATKA", gps.getLongitude());
 
     }
-
 
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
