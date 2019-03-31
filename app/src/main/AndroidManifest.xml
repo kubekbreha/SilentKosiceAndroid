@@ -18,7 +18,9 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity"/>
+
+        <activity android:name=".RecordActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -26,12 +28,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".RecordActivity">
+        <activity android:name=".ProfileActivity"/>
 
-        </activity>
-        <activity android:name=".ProfileActivity">
-
-        </activity>
     </application>
 
 </manifest>
