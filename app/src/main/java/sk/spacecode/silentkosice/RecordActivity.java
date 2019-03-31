@@ -8,7 +8,6 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +23,7 @@ public class RecordActivity extends AppCompatActivity {
     private TextView resultDB;
     private TextView profileText;
     private ImageView progressCircle2;
-    private ImageButton imageButton;
+    private ImageView imageButton;
     private static final int msgWhat = 0x1001;
     private static final int refreshTime = 100;
 
