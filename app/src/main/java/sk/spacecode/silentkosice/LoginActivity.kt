@@ -91,7 +91,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun goToRecordActivity() {
-        val intent = Intent(this, RecordActivity::class.java)
+        val message = edit_textPhone.text.toString()
+        val intent = Intent(this, RecordActivity::class.java).apply {
+            putExtra("userID", message)
+        }
+
         startActivity(intent)
     }
 

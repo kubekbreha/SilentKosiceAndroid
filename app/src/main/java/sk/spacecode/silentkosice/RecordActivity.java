@@ -11,8 +11,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import android.content.Intent;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class RecordActivity extends AppCompatActivity {
@@ -25,8 +30,18 @@ public class RecordActivity extends AppCompatActivity {
     private ImageView progressCircle2;
     private ImageView imageButton;
     private ImageView imageAudio;
+
+    private String userNumber;
+
+    private GPSHelper gps;
+
+
     private static final int msgWhat = 0x1001;
     private static final int refreshTime = 100;
+
+    List<Integer> listOfNoises = new ArrayList<Integer>();
+
+    private DatabaseReference mDatabase;
 
     private boolean recording = false;
     @SuppressLint("HandlerLeak")
@@ -40,8 +55,9 @@ public class RecordActivity extends AppCompatActivity {
             volume = mRecorder.getMaxAmplitude();
             if (volume > 0 && volume < 1000000) {
                 World.setDbCount(20 * (float) (Math.log10(volume)));
-                actualDB.setText((int) World.dbCount + " dB");
 
+                listOfNoises.add((int) World.dbCount );
+                actualDB.setText((int) World.dbCount + " dB");
 
                 handleFront();
             }
@@ -73,6 +89,10 @@ public class RecordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
         mRecorder = new MyMediaRecorder();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        userNumber = getIntent().getStringExtra("userID");
+        gps = new GPSHelper(this);
 
         progressCircle2 = findViewById(R.id.imageView_circleProgress2);
         imageButton = findViewById(R.id.imageView_circleProgress);
@@ -113,8 +133,20 @@ public class RecordActivity extends AppCompatActivity {
                     }
                     recording = true;
                 } else {
+
+                    long tsLong = System.currentTimeMillis() / 1000l;
+                    gps.getMyLocation();
+
+
+                    int sum = 0;
+                    for (int var : listOfNoises) {
+                        sum += var;
+                    }
+
+                    pushDataRecord(String.valueOf(tsLong), String.valueOf(sum/listOfNoises.size()),userNumber, gps.getLatitude(), gps.getLongitude());
+
                     recording = false;
-                     handleFront();
+                    handleFront();
                     mRecorder.delete();
                     handler.removeMessages(msgWhat);
                     actualDB.setText("Not recording");
@@ -123,16 +155,21 @@ public class RecordActivity extends AppCompatActivity {
             }
         });
 
-        GPSHelper gps = new GPSHelper(this);
-        gps.getMyLocation();
-        Log.e("TVOJAMATKA", gps.getLatitude());
-        Log.e("TVOJAMATKA", gps.getLongitude());
+
 
     }
 
     private void startListenAudio() {
         handler.sendEmptyMessageDelayed(msgWhat, refreshTime);
     }
+
+
+
+    private void pushDataRecord(String timestamp, String decibel, String userNumber, String lat, String lon) {
+        DecibelDataJava data = new DecibelDataJava(timestamp, decibel, userNumber, lat, lon);
+        mDatabase.child(userNumber).child("records").child(timestamp).setValue(data);
+    }
+
 
 
     public void startRecord(File fFile) {
