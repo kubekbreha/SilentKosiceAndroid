@@ -1,0 +1,6 @@
+
+zsquid:S1192"^Define a constant instead of duplicating this literal "Something went terribly wrong" 3 times.(´Ù£æ8úØ¾-
+Dsquid:S1185"(Remove this method to simply inherit it.(Ù«µ§8úØ¾-
+wsquid:S00115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(üÿƒÜ8úØ¾-
+|squid:S00115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ì£°´ıÿÿÿÿ8úØ¾-
+Dsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8úØ¾-

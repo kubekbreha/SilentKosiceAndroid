@@ -115,7 +115,7 @@ public class RecordActivity extends AppCompatActivity {
         Log.e("TVOJAMATKA", gps.getLongitude());
 
     }
-
+    
     private void startListenAudio() {
         handler.sendEmptyMessageDelayed(msgWhat, refreshTime);
     }
