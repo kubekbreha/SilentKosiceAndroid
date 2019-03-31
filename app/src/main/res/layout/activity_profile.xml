@@ -10,12 +10,11 @@
     <RelativeLayout
             android:id="@+id/empty"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="55dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:background="@color/colorPrimary">
-
     </RelativeLayout>
 
     <android.support.v7.widget.CardView
@@ -38,15 +37,32 @@
 
             <TextView
                     android:id="@+id/text_user_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/user_name"
                     android:background="@color/colorPrimary"
                     android:textAlignment="center"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="8dp"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"/>
+
+            <ImageView
+                    android:id="@+id/edit_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_mode_edit_black_24dp"
+                    android:layout_alignParentEnd="true"/>
+
+            <ImageView
+                    android:id="@+id/back_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_arrow_back_black_24dp"
+                    android:layout_alignParentStart="true"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -135,6 +151,153 @@
                     android:layout_below="@id/text_total_records"
                     android:textColor="@android:color/white"
                     android:text="@string/total_records_value"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view_rewards"
+            android:layout_margin="8dp"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@id/card_view"
+            app:cardBackgroundColor="@android:color/white"
+            android:layout_gravity="center"
+            card_view:cardElevation="0dp"
+            card_view:cardCornerRadius="32dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <RelativeLayout
+                android:id="@+id/layout_rewards"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/text_reward"
+                    android:text="@string/reward"
+                    android:textAlignment="textStart"
+                    android:textColor="#424242"
+                    android:textSize="20sp"
+                    android:layout_margin="16dp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/text_reward_1"
+                    android:text="@string/reward_1"
+                    android:textAlignment="textStart"
+                    android:textColor="#424242"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_below="@id/text_reward"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <com.sasank.roundedhorizontalprogress.RoundedHorizontalProgressBar
+                    android:id="@+id/progress_bar_1"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="false"
+                    android:maxHeight="16dp"
+                    android:minHeight="16dp"
+                    android:progress="80"
+                    android:layout_below="@id/text_reward_1"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:backgroundColor="#424242"
+                    app:progressColor="@color/colorPrimary"/>
+
+            <TextView
+                    android:id="@+id/text_progress_1"
+                    android:text="@string/progress_1"
+                    android:textAlignment="textStart"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    android:background="@android:color/transparent"
+                    android:translationZ="5dp"
+                    android:layout_marginStart="140dp"
+                    android:layout_alignTop="@id/progress_bar_1"
+                    android:layout_alignStart="@id/progress_bar_1"
+                    android:layout_alignBottom="@id/progress_bar_1"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/text_reward_2"
+                    android:text="@string/reward_2"
+                    android:textAlignment="textStart"
+                    android:textColor="#424242"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_below="@id/progress_bar_1"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <com.sasank.roundedhorizontalprogress.RoundedHorizontalProgressBar
+                    android:id="@+id/progress_bar_2"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="false"
+                    android:maxHeight="16dp"
+                    android:minHeight="16dp"
+                    android:progress="20"
+                    android:layout_below="@id/text_reward_2"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:backgroundColor="#424242"
+                    app:progressColor="@color/colorPrimary"/>
+
+            <TextView
+                    android:id="@+id/text_progress_2"
+                    android:text="@string/progress_2"
+                    android:textAlignment="textStart"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    android:background="@android:color/transparent"
+                    android:translationZ="5dp"
+                    android:layout_marginStart="140dp"
+                    android:layout_alignTop="@id/progress_bar_2"
+                    android:layout_alignStart="@id/progress_bar_2"
+                    android:layout_alignBottom="@id/progress_bar_2"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view_stats"
+            android:layout_margin="8dp"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@id/card_view_rewards"
+            app:cardBackgroundColor="@android:color/white"
+            android:layout_gravity="center"
+            card_view:cardElevation="0dp"
+            card_view:cardCornerRadius="32dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <RelativeLayout
+                android:id="@+id/layout_stats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
 
         </RelativeLayout>
 

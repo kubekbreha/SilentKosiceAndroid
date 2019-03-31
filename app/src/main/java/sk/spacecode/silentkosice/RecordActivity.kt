@@ -4,10 +4,10 @@ import android.media.MediaRecorder
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
-import java.io.IOException
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_record.*
+import java.io.IOException
 
 
 class RecordActivity : AppCompatActivity() {
@@ -81,7 +81,7 @@ class RecordActivity : AppCompatActivity() {
 
     private fun pushDataRecord(timestamp: String, decibel: String, userNumber: String?, lat: String?, long: String?) {
         val data = DecibelData(timestamp, decibel, userNumber, lat, long)
-        val newRef = database.child(userNumber).child("records").child(timestamp).setValue(data)
+        val newRef = database.child(userNumber!!).child("records").child(timestamp).setValue(data)
     }
 
 

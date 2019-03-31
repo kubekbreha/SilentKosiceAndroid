@@ -11,5 +11,10 @@
     <string name="total_records">Total records</string>
     <string name="total_records_value">152</string>
     <string name="today_records_text">Today records</string>
+    <string name="reward">Upcoming rewards</string>
     <string name="today_records_value">5</string>
+    <string name="reward_1">2x Hockey tickets</string>
+    <string name="reward_2">Free city parking</string>
+    <string name="progress_1">8/10</string>
+    <string name="progress_2">4/20</string>
 </resources>
