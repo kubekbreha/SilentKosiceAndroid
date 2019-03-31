@@ -19,15 +19,15 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".ProfileActivity">
+
+        </activity>
+
+        <activity android:name=".RecordActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
-
-        <activity android:name=".RecordActivity">
-
         </activity>
         <activity android:name=".LoginActivity">
 

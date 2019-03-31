@@ -1,6 +1,7 @@
 package sk.spacecode.silentkosice;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import java.io.File;
 
 
@@ -22,6 +22,7 @@ public class RecordActivity extends AppCompatActivity {
     private MyMediaRecorder mRecorder;
     private TextView actualDB;
     private TextView resultDB;
+    private TextView profileText;
     private ImageView progressCircle2;
     private ImageButton imageButton;
     private static final int msgWhat = 0x1001;
@@ -40,6 +41,7 @@ public class RecordActivity extends AppCompatActivity {
 
         actualDB = findViewById(R.id.textView_currentDB);
         resultDB = findViewById(R.id.textView_result);
+        profileText = findViewById(R.id.profile_button);
 
         File file = FileUtil.createFile("temp.amr");
         if (file != null) {
@@ -49,6 +51,14 @@ public class RecordActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Something went terribly wrong", Toast.LENGTH_LONG).show();
         }
 
+        profileText.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(RecordActivity.this, ProfileActivity.class);
+                RecordActivity.this.startActivity(myIntent);
+            }
+        });
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
