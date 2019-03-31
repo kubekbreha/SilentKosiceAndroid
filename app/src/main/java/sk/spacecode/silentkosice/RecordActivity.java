@@ -18,6 +18,7 @@ import java.io.File;
 public class RecordActivity extends AppCompatActivity {
 
     float volume = 10000;
+    private static int counter = 0;
     private MyMediaRecorder mRecorder;
     private TextView actualDB;
     private ImageView profileText;
@@ -79,6 +80,7 @@ public class RecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(RecordActivity.this, ProfileActivity.class);
+                myIntent.putExtra("key_counter", counter);
                 RecordActivity.this.startActivity(myIntent);
             }
         });
@@ -87,7 +89,7 @@ public class RecordActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(!recording){
-
+                    counter++;
                     recording = true;
                     File file = FileUtil.createFile("temp.amr");
                     if (file != null) {

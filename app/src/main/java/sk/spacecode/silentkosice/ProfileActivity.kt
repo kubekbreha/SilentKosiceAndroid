@@ -13,6 +13,10 @@ import kotlinx.android.synthetic.main.activity_profile.*
 
 class ProfileActivity : AppCompatActivity() {
 
+    companion object {
+        private var plusCounter = 0
+    }
+
     var entries: List<Entry> = arrayListOf(
         Entry(1F, 1F), Entry(2F, 5F),
         Entry(3F, 10F), Entry(4F, 8F), Entry(5F, 1F),
@@ -23,6 +27,16 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
+        val intent = intent
+        plusCounter = intent.getIntExtra("key_counter", 0)
+
+        text_today_record_value.text = "$plusCounter"
+        text_total_records_value.text = (text_total_records_value.text.toString().toInt() + plusCounter).toString()
+        progress_bar_1.progress = (plusCounter * 10) + progress_bar_1.progress
+        text_progress_1.text = "${progress_bar_1.progress / 10}/10"
+        progress_bar_2.progress = (plusCounter * 10) + progress_bar_2.progress
+        text_progress_2.text = "${progress_bar_2.progress / 10}/20"
+
         generateChart()
 
         back_icon.setOnClickListener {
@@ -30,8 +44,8 @@ class ProfileActivity : AppCompatActivity() {
             this@ProfileActivity.startActivity(myIntent)
         }
 
-        progress_bar_1.animateProgress(2000, 0, 80)
-        progress_bar_2.animateProgress(2000, 0, 20)
+        progress_bar_1.animateProgress(2000, 0, progress_bar_1.progress)
+        progress_bar_2.animateProgress(2000, 0, progress_bar_2.progress)
 
     }
 
