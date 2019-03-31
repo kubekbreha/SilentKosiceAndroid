@@ -23,6 +23,7 @@ public class RecordActivity extends AppCompatActivity {
     private ImageView profileText;
     private ImageView progressCircle2;
     private ImageView imageButton;
+    private ImageView imageAudio;
     private static final int msgWhat = 0x1001;
     private static final int refreshTime = 100;
 
@@ -42,6 +43,8 @@ public class RecordActivity extends AppCompatActivity {
 
                 imageButton.getLayoutParams().height = (((int) World.dbCount * 100) / 140) * 12;
                 imageButton.getLayoutParams().width = (((int) World.dbCount * 100) / 140) * 12;
+                imageAudio.getLayoutParams().height = (((int) World.dbCount * 100) / 140) * 12;
+                imageAudio.getLayoutParams().width = (((int) World.dbCount * 100) / 140) * 12;
                 progressCircle2.getLayoutParams().height = (((int) World.dbCount * 100) / 90) * 11;
                 progressCircle2.getLayoutParams().width = (((int) World.dbCount * 100) / 90) * 11;
             }
@@ -58,6 +61,7 @@ public class RecordActivity extends AppCompatActivity {
 
         progressCircle2 = findViewById(R.id.imageView_circleProgress2);
         imageButton = findViewById(R.id.imageView_circleProgress);
+        imageAudio = findViewById(R.id.imageView_audio_image);
 
         actualDB = findViewById(R.id.textView_currentDB);
         profileText = findViewById(R.id.profile_button);
