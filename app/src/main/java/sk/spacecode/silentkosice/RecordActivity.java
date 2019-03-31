@@ -95,12 +95,15 @@ public class RecordActivity extends AppCompatActivity {
             volume = mRecorder.getMaxAmplitude();
             if(volume > 0 && volume < 1000000) {
                 World.setDbCount(20 * (float)(Math.log10(volume)));
-                actualDB.setText((int)World.dbCount+" DB");
 
-                imageButton.getLayoutParams().height = (((int)World.dbCount*100)/140)*12;
-                imageButton.getLayoutParams().width = (((int)World.dbCount*100)/140)*12;
-                progressCircle2.getLayoutParams().height = (((int)World.dbCount*100)/90)*11;
-                progressCircle2.getLayoutParams().width = (((int)World.dbCount*100)/90)*11;
+                if(!recording) {
+                    actualDB.setText((int) World.dbCount + " DB");
+
+                    imageButton.getLayoutParams().height = (((int) World.dbCount * 100) / 140) * 12;
+                    imageButton.getLayoutParams().width = (((int) World.dbCount * 100) / 140) * 12;
+                    progressCircle2.getLayoutParams().height = (((int) World.dbCount * 100) / 90) * 11;
+                    progressCircle2.getLayoutParams().width = (((int) World.dbCount * 100) / 90) * 11;
+                }
             }
 
             handler.sendEmptyMessageDelayed(msgWhat, refreshTime);
